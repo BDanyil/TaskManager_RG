@@ -74,6 +74,10 @@ body {
     overflow-wrap: break-word;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 .tasktitle {
     text-align: left;
     color: #585858;
@@ -84,6 +88,7 @@ body {
     padding-top: 18px;
     border-top: solid 0px #bbbbbb;
     border-bottom: solid 0px #bbbbbb;
+    overflow: scroll;
 }
 
 .project-block {
@@ -99,12 +104,14 @@ body {
     border: solid 1px #315589;
     margin: auto;
     width: 120%;
-    
 }
 
 .taskall {
-background-color:#ffffff;
-
+    background-color:#ffffff;
+    margin: auto;
+    width: auto;
+    overflow-wrap: break-word;
+    overflow: scroll;
 }
 
 .taskall:hover {
@@ -145,11 +152,11 @@ background-color:#ffffff;
 }
 
 .taskicons{
-padding-top: 15px;
-border-left: solid 1px #bbbbbb;
-border-bottom: solid 0px #bbbbbb;
-border-top: solid 0px #bbbbbb;
-border-right: solid 0px #bbbbbb;
+    padding-top: 15px;
+    border-left: solid 1px #bbbbbb;
+    border-bottom: solid 0px #bbbbbb;
+    border-top: solid 0px #bbbbbb;
+    border-right: solid 0px #bbbbbb;
 }
 
 .checkbox {
@@ -165,9 +172,9 @@ h5 {
 }
 
 .btn {
-width: 400px;
-color: white;
-padding-right: 35px;
+    width: 400px;
+    color: white;
+    padding-right: 35px;
 }
 
 .btn-primary {
@@ -186,7 +193,7 @@ padding-right: 35px;
 }
 
 .usermail {
- text-align: right;
+    text-align: right;
 }
 
 .completed {

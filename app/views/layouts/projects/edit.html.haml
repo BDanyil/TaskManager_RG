@@ -1,4 +1,0 @@
-.edit_project_form
-    = form_with model: @project, url: "/projects", method: :put do |form|
-        = form.text_field :title, { placeholder: 'Edit' }
-        = form.submit 'Update project'
