@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
     if @project.save
       redirect_to root_url
     else
-      flash[:error] = @project.errors.to_a
+      flash[:error] = @project.errors.full_messages
       render :new, status: :unprocessable_entity
     end
   end
