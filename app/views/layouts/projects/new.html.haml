@@ -1,0 +1,7 @@
+%br
+%br
+%br
+.create_project_form
+    = form_with model: @project, url: "/projects", method: :post do |form|
+        = form.text_field :title, { placeholder: 'New Project' }
+        = form.submit 'Create project'

@@ -1,0 +1,8 @@
+
+.text-center
+    .create_project_form
+        .edit_project_form
+            = form_for @project, url: project_path(@project), method: :put do |form|
+                = form.text_field :title, { placeholder: 'Project title' }
+                %p
+                = form.submit 'Update project', class: "btn btn-primary btnall"

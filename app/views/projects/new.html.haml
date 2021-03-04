@@ -1,0 +1,7 @@
+.field
+    .text-center
+        .create_project_form
+            = form_with model: @project, url: "/projects", method: :post, local: false do |form|
+                = form.text_field :title, { placeholder: 'New Project' }
+                %p
+                = form.submit 'Create project', class: "btn btn-primary btnall"

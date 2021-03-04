@@ -1,0 +1,10 @@
+.field
+    .text-center
+        .create_project_form 
+            .edit_task_form
+                = form_for @task, url: project_task_path(@task), method: :put do |form|
+                    = form.text_field :title, { placeholder: 'Task title' }
+                    %p
+                    = form.datetime_field :deadline
+                    %p
+                    = form.submit 'Update task', class: "btn btn-primary btnall"

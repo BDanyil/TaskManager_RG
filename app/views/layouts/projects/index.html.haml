@@ -1,0 +1,10 @@
+%h1 Hello World
+
+- @projects.each do |project|
+    %h1= project.title
+    %span= project.user_id
+    .delete_button
+        = link_to :delete, project_path(project), method: :delete, data: { confirm: 'Are you sure?' }
+    .edit_button
+        = link_to :edit, edit_project_path(project)
+= link_to 'New Project', new_project_path

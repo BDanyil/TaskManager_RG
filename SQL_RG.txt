@@ -1,0 +1,80 @@
+Given tables:
+01​. tasks (id, name, status, project_id)
+02.​ projects (id, name)
+
+
+1. Get all statuses, not repeating, alphabetically ordered.
+
+SELECT DISTINCT status 
+FROM tasks 
+ORDER BY status;
+______
+2. Get the count of all tasks in each project, order by tasks count
+descending.
+
+SELECT projects.id, projects.name, COUNT(tasks.name) AS tasks_count
+FROM tasks 
+JOIN projects 
+	ON projects.id = tasks.project_id 
+GROUP BY tasks.project_id 
+ORDER BY count DESC
+______
+3. Get the count of all tasks in each project, order by projects
+names
+
+SELECT projects.name, COUNT(tasks) AS tasks_count
+FROM tasks
+LEFT JOIN Projects
+	ON project_id = projects.id
+GROUP BY tasks.name
+ORDER BY projects.name;
+______
+4. Get the tasks for all projects having the name beginning with
+"N" letter
+
+SELECT * 
+FROM tasks 
+WHERE name LIKE "N%";
+______
+5. Get the list of all projects containing the 'a' letter in the middle of
+the name, and show the tasks count near each project. Mentionthat there can exist projects without tasks and tasks with
+project_id = NULL
+
+SELECT projects.name, COUNT(tasks.id)
+FROM tasks 
+RIGHT OUTER JOIN projects 
+	ON projects.id = tasks.project_id AND projects.name LIKE '%a%'
+GROUP BY projects.name;
+
+______
+6. Get the list of tasks with duplicate names. Order alphabetically
+
+SELECT name, COUNT(name) AS duplicates
+FROM tasks 
+GROUP BY name HAVING duplicates > 1 
+ORDER BY name;
+
+______
+7. Get list of tasks having several exact matches of both name and
+status, from the project 'Garage'. Order by matches count
+
+SELECT tasks.name, status, COUNT(*)
+FROM tasks 
+JOIN projects 
+	ON (tasks.project_id = projects.id)
+WHERE projects.name = 'Garage'
+GROUP BY tasks.name, status HAVING COUNT(*) > 1
+ORDER BY COUNT(*);
+
+______
+8. Get the list of project names having more than 10 tasks in status
+'completed'. Order by project_id
+RubyGarage
+
+SELECT projects.name, COUNT(*)
+FROM  tasks 
+JOIN projects 
+	ON (tasks.project_id = projects.id)
+WHERE tasks.status = "completed"
+GROUP BY projects.id HAVING COUNT(*) > 10
+ORDER BY projects.id;

@@ -1,0 +1,83 @@
+%link{:crossorigin => "anonymous", :href => "https://use.fontawesome.com/releases/v5.7.0/css/all.css", :integrity => "sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ", :rel => "stylesheet"}/
+
+
+%h6{:class => 'usermail'}= @current_user.email
+
+%header 
+    = link_to destroy_user_session_path, :method => :delete do
+        .sign_out-btn.glyphicon.glyphicon-plus Log out
+    
+
+
+.head-title
+    .titlenew
+        %h1 SIMPLE TODO LISTS 
+        %h2 FROM RUBY GARAGE
+
+%body
+    - @projects.each do |project|
+        .project-block
+            .container 
+                .row.projectall 
+                    .col-10
+                        %h1{:class => 'projecttitle'}= project.title 
+            
+                    .col-2.row
+                        .edit_button.projectbtn
+                            = link_to edit_project_path(project) do
+                                %div.far.fa-edit.gly
+                        .vertical-line ｜
+
+                        .delete_button.projectbtn
+                            = link_to project_path(project), method: :delete, data: { confirm: 'Are you sure?' } do
+                                %div.far.fa-trash-alt.gly
+                        .vertical-line ｜
+
+                        .addtsk_button.projectbtn 
+                            = link_to new_project_task_path(project) do
+                                %div.fa.fa-plus.gly
+        
+
+                
+                - project.tasks.order("position ASC").each do |task|
+                    %div{ class: 'container taskall container-line task' + (' completed' if task.completed).to_s }
+                        .row         
+                            .checkbox.col-1.my-colred.container-linegrey
+                                - if task.completed      
+                                    = check_box('task', 'completed', { id: task.id, class: 'task-complete-checkbox', checked: true})
+                                - else
+                                    = check_box('task', 'completed', { id: task.id, class: 'task-complete-checkbox', checked: false})
+                                    
+                            .col-8
+                                .tasktitle= task.title
+                                .taskdeadline= task.deadline
+
+                            .col-3.row.container-line.justify-content-center.taskicons
+                                .priority_down
+                                    = link_to task_priority_down_path(task.project, task), method: :patch, class: "priority-down" do
+                                        %div.fas.fa-caret-down
+
+                                .vertical-line ｜
+                                .priority_up
+                                    = link_to task_priority_up_path(task.project, task), method: :patch, class: "priority-up button" do
+                                        %div.fas.fa-caret-up
+                                        
+                                .vertical-line ｜        
+                                .edit_button
+                                    = link_to edit_project_task_path(project, task) do
+                                        %div.far.fa-edit
+
+                                .vertical-line ｜
+                                .delete_button
+                                    = link_to project_task_path(project, task), method: :delete, data: { confirm: 'Are you sure?' } do
+                                        %div.far.fa-trash-alt
+
+
+
+    = link_to new_project_path do 
+        .create-project-btn Add TODO List
+
+
+%footer
+    %h5.justify-content-center 
+        ©Ruby Garage
