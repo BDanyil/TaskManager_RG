@@ -16,8 +16,8 @@
 
 %body
     - @projects.each do |project|
-        .project-block
-            .container 
+        .container
+            .project-block.col-8
                 .row.projectall 
                     .col-10
                         %h1{:class => 'projecttitle'}= project.title 
@@ -48,7 +48,7 @@
                                 - else
                                     = check_box('task', 'completed', { id: task.id, class: 'task-complete-checkbox', checked: false})
                                     
-                            .col-8.scroll
+                            .col-8.scroll.m-auto
                                 .tasktitle= task.title
                                 .taskdeadline= task.deadline
 
@@ -74,8 +74,9 @@
 
 
 
-    = link_to new_project_path do 
-        .create-project-btn Add TODO List
+    .col-2.m-auto
+        = link_to new_project_path do 
+            .create-project-btn Add TODO List
 
 
 %footer

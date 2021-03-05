@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  before_action :authenticate_user!
-
   def index; end
 
   def new
@@ -16,7 +14,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to root_url
     else
-      flash[:error] = @task.errors.full_messages
+      set_errors
       render :new, status: :unprocessable_entity
     end
   end
@@ -34,7 +32,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to root_url
     else
-      flash[:error] = @task.errors.full_messages
+      set_errors
       render :edit, status: :unprocessable_entity
     end
   end
@@ -42,7 +40,7 @@ class TasksController < ApplicationController
   def destroy
     find_task
 
-    flash[:error] = @task.errors.full_messages unless @task.destroy
+    set_errors unless @task.destroy
     redirect_to root_url
   end
 
@@ -53,7 +51,7 @@ class TasksController < ApplicationController
       @task.move_lower
       redirect_to root_url
     else
-      flash[:error] = @task.errors.full_messages
+      set_errors
     end
   end
 
@@ -64,7 +62,7 @@ class TasksController < ApplicationController
       @task.move_higher
       redirect_to root_url
     else
-      flash[:error] = @task.errors.full_messages
+      set_errors
     end
   end
 
@@ -74,11 +72,15 @@ class TasksController < ApplicationController
     if @task.update(completed: task_params[:completed])
       head :ok
     else
-      render json: @task.errors.full_messages, status: :unprocessable_entity
+      render json: @task.errors.full_messages.join("\n"), status: :unprocessable_entity
     end
   end
 
   private
+
+  def set_errors
+    flash.now[:error] = @task.errors.full_messages.join("\n")
+  end
 
   def task_params
     params.require(:task).permit(:title, :completed, :deadline)
