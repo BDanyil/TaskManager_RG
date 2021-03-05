@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!
-
   def index
     @projects = Project.where(user_id: current_user.id)
   end
@@ -19,7 +17,7 @@ class ProjectsController < ApplicationController
     if @project.save
       redirect_to root_url
     else
-      flash[:error] = @project.errors.full_messages
+      set_errors
       render :new, status: :unprocessable_entity
     end
   end
@@ -27,7 +25,7 @@ class ProjectsController < ApplicationController
   def destroy
     find_project
 
-    flash[:error] = @project.errors.to_a unless @project.destroy
+    set_errors unless @project.destroy
     redirect_to root_url
   end
 
@@ -43,7 +41,7 @@ class ProjectsController < ApplicationController
     if @project.save
       redirect_to root_url
     else
-      flash[:error] = @project.errors.full_messages
+      set_errors
       render :edit, status: :unprocessable_entity
     end
   end
@@ -60,5 +58,9 @@ class ProjectsController < ApplicationController
 
   def set_project_title
     @project.title = project_params[:title]
+  end
+
+  def set_errors
+    flash.now[:error] = @project.errors.full_messages.join("\n")
   end
 end

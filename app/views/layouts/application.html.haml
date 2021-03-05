@@ -11,9 +11,9 @@
   %body
     %br
     %br
-    .errors
+    .errors.text-center.pb-5
       - flash.each do |_type, message|
-        %span= message
+        %span.alert.alert-danger= message
 
     .content
       = yield

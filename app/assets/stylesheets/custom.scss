@@ -4,7 +4,7 @@ html {
     position: relative;
     min-height: 100vh;
     font-size: 16px;
-  }
+}
 
 body {
     min-height: 100vh;
@@ -15,9 +15,11 @@ body {
     background: linear-gradient(to bottom, #d9d5c1 29%,#d4b757 57%,#c4720c 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9d5c1', 
                                               endColorstr='#c4720c',GradientType=0 );
-  }
+}
 
-
+::-webkit-scrollbar {
+    display: none;
+}
 
 .head-title {
     text-align: center;
@@ -27,10 +29,8 @@ body {
 .create-project-btn {
     background-image: linear-gradient(#5184BD, #395F9B);
     border: solid 1px #315589;
-    width: 12%;
     padding: 10px;
     color: #ffffff;
-    margin: auto;
     text-align: center;
 }
 
@@ -44,8 +44,7 @@ body {
     top: 0;
     right: 0;
     font-size: 15px;
-    background-color: rgba(0,0,0,.1);
-    
+    background-color: rgba(0,0,0,.1);   
 }
 
 .form-wrapper {
@@ -68,32 +67,21 @@ body {
 
 .projecttitle {
     color: white;
-    float: left;
-    width: 400px;
     font-size: 20px;
-    overflow-wrap: break-word;
-}
-
-::-webkit-scrollbar {
-    display: none;
+    white-space: nowrap;
+    overflow: scroll;
 }
 
 .tasktitle {
-    text-align: left;
     color: #585858;
     font-weight: bold;
     font-size: x-large;
     font-size: 16px;
-    padding-left: 20px;
-    padding-top: 18px;
-    border-top: solid 0px #bbbbbb;
-    border-bottom: solid 0px #bbbbbb;
     overflow: scroll;
+    white-space: nowrap;
 }
 
 .project-block {
-    width: 700px;
-    margin: auto;
     margin-bottom: 80px;
     background-color: #eaeaea;
 }
@@ -110,8 +98,6 @@ body {
     background-color:#ffffff;
     margin: auto;
     width: auto;
-    overflow-wrap: break-word;
-    overflow: scroll;
 }
 
 .taskall:hover {
@@ -123,15 +109,13 @@ body {
 }
 
 .project-block {
-    width: 700px;
     margin: auto;
     margin-bottom: 80px;
-    background-color: #eaeaea;
+    padding: 0 !important;
 }
 
 .container {
     margin: auto;
-    background-color: #ffffff;
     width: auto;
     padding: 0%;
 }
