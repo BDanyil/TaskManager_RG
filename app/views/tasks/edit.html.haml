@@ -3,7 +3,7 @@
         .create_project_form 
             .edit_task_form
                 = form_for @task, url: project_task_path(@task), method: :put do |form|
-                    = form.text_field :title, { placeholder: 'Task title', maxlength: '140', size: '25' }
+                    = form.text_field :title, { placeholder: 'Task title', maxlength: '140', size: '25', required: true   }
                     %p
                     = form.datetime_field :deadline
                     %p

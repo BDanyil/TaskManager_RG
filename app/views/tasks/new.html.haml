@@ -2,6 +2,6 @@
     .text-center
         .create_project_form
             = form_with model: @task, url: project_tasks_path(@task.project_id), method: :post do |form|
-                = form.text_field :title, { placeholder: 'Task title', maxlength: '140', size: '25' }
+                = form.text_field :title, { placeholder: 'Task title', maxlength: '140', size: '25', required: true }
                 %p
                 = form.submit 'Add task', class: "btn-primary btn btnall"
