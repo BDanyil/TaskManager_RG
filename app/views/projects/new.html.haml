@@ -2,6 +2,6 @@
     .text-center
         .create_project_form
             = form_with model: @project, url: projects_path, method: :post do |form|
-                = form.text_field :title, { placeholder: 'New Project' }
+                = form.text_field :title, { placeholder: 'New Project', maxlength: '140', size: '25'  }
                 %p
                 = form.submit 'Create project', class: "btn btn-primary btnall"
