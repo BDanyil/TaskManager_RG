@@ -2,6 +2,6 @@
     .create_project_form
         .edit_project_form
             = form_for @project, url: project_path(@project), method: :put do |form|
-                = form.text_field :title, { placeholder: 'Project title' }
+                = form.text_field :title, { placeholder: 'Project title', maxlength: '140', size: '25' }
                 %p
                 = form.submit 'Update project', class: "btn btn-primary btnall"
